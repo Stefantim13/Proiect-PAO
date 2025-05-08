@@ -1,3 +1,7 @@
+
+import java.util.Comparator;
+import java.util.List;
+
 public class Dish implements Comparable<Dish>{
     private String name;
     private double price;
@@ -6,8 +10,14 @@ public class Dish implements Comparable<Dish>{
     public Dish(String name, double price, String type){
         this.name = name;
         this.price = price;
-        this.type = type;
+        this.type = type; // Mic dejun, Fel Principal, Salate, Desert, Bautura
     }
+
+    public static final List<String> TYPE_ORDER = List.of("Mic dejun", "Fel Principal", "Salate", "Desert", "Bautura");
+
+    public static final Comparator<Dish> BY_TYPE_ORDER = Comparator
+        .comparingInt((Dish d) -> TYPE_ORDER.indexOf(d.getType()))
+        .thenComparing(Dish::getPrice);
 
     public String getName(){
         return name;
@@ -32,6 +42,8 @@ public class Dish implements Comparable<Dish>{
     public void setType(String type) {
         this.type = type;
     }
+
+    
 
     @Override
     public String toString() {
